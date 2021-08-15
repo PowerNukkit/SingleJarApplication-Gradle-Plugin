@@ -15,9 +15,9 @@
  */
 
 plugins {
+    id("com.gradle.plugin-publish") version "0.15.0"
     `java-gradle-plugin`
     kotlin("jvm") version "1.5.10"
-    `maven-publish`
 }
 
 val kotlinVersion = "1.5.10"
@@ -27,6 +27,19 @@ gradlePlugin {
         create("single-jar-application") {
             id = "org.powernukkit.single-jar-application"
             implementationClass = "org.powernukkit.gradle.singlejarapp.SingleJarApplicationPlugin"
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://devs.powernukkit.org/"
+    vcsUrl = "https://github.com/PowerNukkit/SingleJarApplication-Gradle-Plugin"
+    description = "This gradle plugin let you create fatjars without repacking the libs, they are kept intact inside the lib folder of the single jar!"
+    tags = listOf("fatjar", "shadow", "single-jar", "packaging", "jar", "jar-in-jar")
+
+    (plugins) {
+        "single-jar-application" {
+            displayName = "Single Jar Application"
         }
     }
 }
@@ -54,5 +67,4 @@ dependencies {
     implementation(kotlin("reflect", kotlinVersion))
     implementation("org.ow2.asm", "asm", "9.2")
     implementation("org.ow2.asm", "asm-commons", "9.2")
-
 }
